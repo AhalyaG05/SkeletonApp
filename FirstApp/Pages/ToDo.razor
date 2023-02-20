@@ -1,0 +1,38 @@
+﻿@page "/todo"
+
+<PageTitle>
+My To Do list
+</PageTitle>
+
+<h1>ToDo</h1>
+<h3>This is the list of my to do items.</h3>
+<p> You have currently left with @todoList.Count(todo => !todo.Done) item to do! </p>
+<p> You have completed @todoList.Count(todo => todo.Done) item! </p>
+
+<ul>
+@foreach (var todo in todoList)
+{
+    <li> 
+    <input type = "checkbox" @bind = "todo.Done"/>
+    @todo.Item 
+    </li>
+}
+</ul>
+
+<input placeholder ="Add Task" @bind = "newTodo"/>
+<button @onclick="Add"> Add </button> 
+
+@code {
+
+private List<TodoItem> todoList = new();
+private string? newTodo;
+
+private void Add()
+{
+    if(!string.IsNullOrWhiteSpace(newTodo))
+    {
+        todoList.Add(new TodoItem{ Item = newTodo });
+        newTodo = string.Empty;
+    }
+}
+}
