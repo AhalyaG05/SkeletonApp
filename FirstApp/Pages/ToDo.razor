@@ -1,4 +1,5 @@
-﻿@page "/todo"
+﻿@using FirstApp.Models;
+@page "/todo"
 
 <PageTitle>
 My To Do list
@@ -6,7 +7,7 @@ My To Do list
 
 <h1>ToDo</h1>
 <h3>This is the list of my to do items.</h3>
-<p> You have currently left with @todoList.Count(todo => !todo.Done) item to do! </p>
+<p> You currently have left with @todoList.Count(todo => !todo.Done) item to do! </p>
 <p> You have completed @todoList.Count(todo => todo.Done) item! </p>
 
 <ul>
@@ -35,4 +36,5 @@ private void Add()
         newTodo = string.Empty;
     }
 }
+
 }
