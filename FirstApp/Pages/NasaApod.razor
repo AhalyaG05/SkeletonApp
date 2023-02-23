@@ -4,25 +4,35 @@
 @inject NasaClient NasaClient;
 @using FirstApp.Shared.Components;
 
+<PageTitle alignment="center">
+    NASA Apod
+</PageTitle>
+
+<br/>
+
+<h1>NASA Apod</h1>
+
+
 <Header title="@nasaResponse.title" subTitle="@nasaResponse.date" description="@nasaResponse.explanation"/>
 
 <br/>
 
 <NasaImageSection imgUrl="@nasaResponse.url" hdUrl="@nasaResponse.hdurl" copyright="@nasaResponse.copyright"/>
 
-<PageTitle>
-    NASA Apod
-</PageTitle>
+<input placeholder ="Add Date" @bind = "NasaClient.newdate"/>
+<button @onclick="AddDate"> Add Date </button>
 
-<h1>NASA Apod</h1>
-
-<h3>This is the list of my to do items.</h3>
 
 @code {
 
 private  NasaResponse? nasaResponse = null;
 
 protected override async Task OnInitializedAsync(){
+    nasaResponse = await NasaClient.GetNasa();
+}
+
+private async Task AddDate()
+{
     nasaResponse = await NasaClient.GetNasa();
 }
 
